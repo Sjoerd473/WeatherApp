@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not-to-doist</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-top">
+            <ul class="sidebar-list-top">
+                <li><button class="sortBtn">Inbox</button></li>
+                <li><button class="sortBtn">Today</button></li>
+                <li><button class="sortBtn">Upcoming</button></li>
+                <li><button class="sortBtn">Filters</button></li>
+            </ul>
+        </div>
+        <div class="sidebar-middle">
+            <ul class="sidebar-list-middle">
+                <li><button class="projectBtn">Project 1</button></li>
+                <li><button class="projectBtn">Project 2</button></li>
+                <li><button class="projectBtn">Project 3</button></li>
+                <li><button class="projectBtn">Project 4</button></li>
+                <li><button class="projectBtn">Project 5</button></li>
+            </ul>
+        </div>
+        <div class="sidebar-bottom">
+            <button class="newProjectBtn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <title>plus-circle-outline</title>
+                    <path
+                        d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" />
+                </svg>Create new project</button>
+        </div>
+    </div>
+
+    
+    <div class="main">
+        <nav class="navbar">
+            <label for=""></label>
+            <input type="search" name="search" id="search">
+        </nav>
+        <main class="project-container">
+             <div class="project">
+                <div>
+                    <h1>Project Name</h1>
+                    <button class="addtaskBtn">Add Task</button>
+                </div>
+                <div class="subsection">
+                    <div class="task">
+                        <button>This will be a checkbox</button>
+                        <div>
+                            <p>Walk the dog</p>
+                            <p>Tomorrow</p>
+                        </div>
+                    </div>
+                    <button class="addtaskBtn">Add Task</button>
+                </div>
+                <div class="subsection">
+                    <div class="task">
+                        <button>This will be a checkbox</button>
+                        <div>
+                            <p>Walk the dog</p>
+                            <p>Tomorrow</p>
+                        </div>
+                    </div>
+                    <button class="addtaskBtn">Add Task</button>
+                </div>
+                <div class="subsection">
+                    <div class="task">
+                        <button>This will be a checkbox</button>
+                        <div>
+                            <p>Walk the dog</p>
+                            <p>Tomorrow</p>
+                        </div>
+                    </div>
+                    <button class="addtaskBtn">Add Task</button>
+                </div>
+                <button class="addtaskBtn">Add Task</button>
+
+            </div> 
+        </main>
+        <dialog class="task-modal">
+
+            <button class="closeBtn" autofocus="">Close</button>
+
+            <form action="">
+                <label for="title">Task Title:</label>
+                <input type="text" id="title" name="title" placeholder="Task">
+
+                <label for="desc">Description:</label>
+                <input type="text" id="desc" name="desc" placeholder = 'Description'>
+
+                <label for="date">Due date:</label>
+                <input type="date" id="date" name="date" placeholder ='19/12/2024'>
+
+                <fieldset>
+                    <legend>Select priority:</legend>
+
+                    <div>
+                        <input type="radio" id="low" name="prio" value="low" checked />
+                        <label for="low">Low</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="medium" name="prio" value="medium" />
+                        <label for="medium">Medium</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="high" name="prio" value="high" />
+                        <label for="high">High</label>
+                    </div>
+                </fieldset>
+
+
+                <label for="confirm"></label>
+                <input type="button" value="Submit" id="confirmTask">
+            </form>
+
+        </dialog>
+
+        <dialog class="project-modal">
+            <form action="">
+                <label for="pTitle">Project Title:</label>
+                <input type="text" id="pTitle" name="pTitle" placeholder="Project Name" autofocus>
+                <label for="confirm"></label>
+                <input type="button" value="Submit" id="confirmProject">
+                <button autofocus="">Close</button>
+            </form>
+
+        </dialog>
+    </div>
+
+</body>
+
+</html>
+
+
+<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <title>plus-circle-outline</title>
+    <path
+        d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" />
+</svg> -->

@@ -39,12 +39,6 @@ return {makeDiv, makePara, makeHeader, makeButton, makeListItem}
 
 }
 
-// function BtnEvents(){
-//     const projectModal () =>{
-
-//     }
-// }
-
  
 
 export const DOMgen = DOMMaker();

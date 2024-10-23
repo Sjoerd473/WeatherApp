@@ -1,4 +1,4 @@
-import {Project} from "./project.js"
+
 
 function DOMMaker(){
     const makeDiv = (group = undefined) =>{

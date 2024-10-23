@@ -19,8 +19,10 @@ body {
   height: 100vh;
   --fonts: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-family: var(--fonts);
-  display:grid;
-  grid-template-columns: 0.15fr 1fr;;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap:30px;
+  justify-content: center;
 }
 
 
@@ -57,63 +59,8 @@ h6 {
 #__next {
   isolation: isolate;
 }
-/* 
-  *{
-    border:1px solid rebeccapurple
-  } */
 
-  .sidebar, .sidebar ul{
-    display:flex;
-    flex-direction: column;
-    
-  }
-  .sidebar {
-    gap:3rem;
-    background-color: var(--wrapper-green);
-    font-family: var(--fonts);
-  }
-  nav{
-    background-color: var(--wrapper-green);
-  }
 
-  .sidebar ul{
-    gap: 1rem;
-  }
-
-  .sidebar ul >li{
-    width:100%
-  }
-
-  .sidebar-list-top, .sidebar-list-middle{
-    margin-top: 5.5rem;
-    align-items: center;
-    padding: 0
-  }
-
-  .sidebar button{
-    padding: 5px 0;
-    width:100%
-    
-  }
-
-  .sidebar-list-middle button{
-    background-color: pink;
-
-  }
-
-  .main{
-    display:grid;
-    grid-template-rows: 0.1fr 1fr;
-  }
-
-  .project{
-    display:grid;
-    grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
-    gap:2rem;
-    margin:1rem;
-  }
-
-  svg{
-    width:2rem;
-    display:inline;
-  }
+p{
+  font-size: 5rem;
+}

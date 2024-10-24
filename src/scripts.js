@@ -6,7 +6,7 @@ import { DOMgen } from "./DOMgenerator.js";
 // {mode: 'cors'}
 
 function DataGrabber() {
-  let allWeatherData ;
+  let allWeatherData;
 
   let parent = document.querySelectorAll(`[data-row]`);
   let buttonParent = document.querySelector(".day-button__container");
@@ -21,7 +21,7 @@ function DataGrabber() {
     return weatherData;
   };
 
-  const getWeatherData =  () => {
+  const getWeatherData = () => {
     return allWeatherData;
   };
 
@@ -103,31 +103,26 @@ function DataGrabber() {
     }
   };
 
-  const asyncDatesDays = async (day) =>{
-    buttonParent.replaceChildren() //can this be done differently?
-    for (let i = 0; i< 7; i++){
-        let input = document.querySelector('#search').value
-    let date = allWeatherData.days[i].datetime
-    let button = DOMgen.makeButton();
+  const asyncDatesDays = async (day) => {
+    buttonParent.replaceChildren(); //can this be done differently?
+    for (let i = 0; i < 7; i++) {
+      let input = document.querySelector("#search").value;
+      let date = allWeatherData.days[i].datetime;
+      let button = DOMgen.makeButton();
 
-    button.textContent = date
-   
-    buttonParent.appendChild(button);
+      button.textContent = date;
 
-    button.addEventListener('click', () =>{
-        returnData(i, input)
-        
-    })
-    // buttonParent.children[i].textContent = date
-    
+      buttonParent.appendChild(button);
+
+      button.addEventListener("click", () => {
+        returnData(i);
+      });
+      // buttonParent.children[i].textContent = date
     }
-  }
-  const returnData = async (day, input) => {
-    if (typeof(allWeatherData) != 'object' ){
-        await weatherData(input);
-        console.log('boop')
-    }
-    
+  };
+  const returnData = async (day) => {
+  
+
     await asyncTimeHours(day);
     await asyncTempHours(day);
     await asyncIconHours(day);
@@ -136,9 +131,15 @@ function DataGrabber() {
     await asyncTempFeelHours(day);
     await asyncUVHours(day);
     await asyncPressureHours(day);
-    await asyncDatesDays()
+    await asyncDatesDays();
   };
-  return { returnData, getWeatherData, asyncDatesDays };
+
+  const returnEverything = async (day, input) => {
+    await weatherData(input);
+
+   await returnData(day)
+  };
+  return { returnData, returnEverything, getWeatherData, asyncDatesDays };
 }
 
 function ButtonPlacer() {
@@ -147,17 +148,17 @@ function ButtonPlacer() {
   const searchButton = async () => {
     let button = document.querySelector(".searchBtn");
     button.addEventListener("click", () => {
-      weatherData.returnData(0, inputGrabber());
-    //   weatherData.asyncDatesDays()
+      weatherData.returnEverything(0, inputGrabber());
+      //   weatherData.asyncDatesDays()
       console.log(weatherData.getWeatherData());
     });
   };
 
   const inputGrabber = () => {
-    let input = document.querySelector('#search').value
+    let input = document.querySelector("#search").value;
     // document.querySelector('#search').value = '';
     return input;
-  }
+  };
 
   const dayButtons = () => {
     const parent = document.querySelector(".day-button__container");
@@ -172,7 +173,6 @@ function ButtonPlacer() {
 }
 let test2 = ButtonPlacer();
 test2.searchButton();
-;
 // let test = DataGrabber();
 // let button = document.querySelector(".searchBtn");
 // button.addEventListener("click", () => {

@@ -15,14 +15,10 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  --wrapper-green: rgb(41, 170, 245);
-  height: 100vh;
+
   --fonts: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-family: var(--fonts);
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap:30px;
-  justify-content: center;
+ 
 }
 
 
@@ -64,3 +60,7 @@ h6 {
 p{
   font-size: 5rem;
 }
+
+/* .hidden{
+  display:none;
+} */

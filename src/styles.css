@@ -87,8 +87,13 @@ ul{
 .daily__container{
   display:grid;
   grid-template-columns: 1fr 1fr;
+  gap:5rem;
 }
 
+.daily__container-left, .daily__container-right{
+  display:grid;
+  grid-template-rows:repeat(5, 1fr)
+}
 .day-button__container{
 
 display:flex;

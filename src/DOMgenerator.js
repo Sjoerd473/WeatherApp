@@ -28,6 +28,13 @@ function DOMMaker(){
         return el
 }
 
+    const makeImage = () =>{
+        let el = document.createElement('img')
+        // el.src = source;
+        return el
+
+    }
+
 const makeListItem = (string, group) =>{
     let el = document.createElement('li');
     el.textContent = string;
@@ -35,7 +42,7 @@ const makeListItem = (string, group) =>{
     return el
 }
 
-return {makeDiv, makePara, makeHeader, makeButton, makeListItem}
+return {makeDiv, makePara, makeHeader, makeButton, makeListItem, makeImage}
 
 }
 

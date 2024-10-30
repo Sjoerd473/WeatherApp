@@ -57,10 +57,105 @@ h6 {
 }
 
 
-p{
-  font-size: 5rem;
-}
+
 
 /* .hidden{
   display:none;
 } */
+
+nav {
+  margin: auto;
+  margin-bottom:5rem;
+  width:50%
+}
+
+.search__container{
+  margin:auto;
+  width:50%;
+}
+
+.radio__buttons{
+  display:flex;
+  justify-content: space-between;
+}
+
+ul{
+  display:flex;
+  gap:1rem;
+}
+
+.daily__container{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.day-button__container{
+
+display:flex;
+width:100%
+}
+
+.day-button__container > button{
+  flex-grow: 1;
+}
+
+button p {
+  font-size: 1rem;
+}
+
+button img {
+  width: 5rem;
+  margin:auto;
+}
+
+body{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather__container{
+  margin:auto;
+  table-layout: fixed;
+  border-collapse: collapse;
+  width:70vw;
+}
+
+.text__accent{
+  font-size:0.75em;
+  margin-left: -5px
+}
+thead tr th{
+  border:1px solid black;
+  font-size: 1.25rem;
+  padding:3px;
+}
+
+td img{
+  width:40%;
+  margin: auto;
+}
+
+
+.weather__container-body tr td{
+  border:1px solid black;
+  text-align: center;
+  width:10%;
+  border-style: none;
+   border-bottom: 1px solid black;
+  /* height:30px; temporary so I can see the cells */
+  /* box-shadow: inset 0px 8px 3px -8px black; */
+}
+
+
+
+
+.weather__container-body tr:nth-child(odd){
+  background-color: hsl(216, 71%, 90%);
+ 
+}
+
+.weather__container-body tr:nth-child(even){
+  background-color: hsl(268, 73%, 90%)
+}
+

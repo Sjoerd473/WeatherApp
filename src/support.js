@@ -138,4 +138,4 @@ function supportFunction()  {
   return { windDirChecker, tempChecker, iconInterpreter}
 }
 
-export const boop = supportFunction()
+export const supportFunctions = supportFunction()

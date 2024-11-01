@@ -2,7 +2,6 @@ import "./styles.css";
 import { DOMgen } from "./DOMgenerator.js";
 import { supportFunctions } from "./support.js";
 
-
 // link using latitude and longitude
 // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/38.9697,-77.385?key=YOUR_API_KEY
 // {mode: 'cors'}
@@ -12,18 +11,20 @@ function DataGrabber() {
 
   const parent = document.querySelectorAll(`[data-row]`);
   const buttonParent = document.querySelector(".day-button__container");
-  const parentLeft = document.querySelector('.daily__container-left')
-  const parentRight = document.querySelector('.daily__container-right')
+  const parentLeft = document.querySelector(".daily__container-left");
+  const parentRight = document.querySelector(".daily__container-right");
 
   const weatherData = async function (input) {
-    
-    let results = await fetch(
+    try {let results = await fetch(
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${input}?unitGroup=metric&key=57279EDE8NTFP5ZE9WC6AJK6X&contentType=json&lang=it`
     );
     let weatherData = await results.json();
     allWeatherData = weatherData;
     console.log(weatherData);
     return weatherData;
+  } catch(error){
+    alert('Something went wrong, try again.')
+  }
   };
 
   const getWeatherData = () => {
@@ -31,7 +32,6 @@ function DataGrabber() {
   };
 
   const asyncTimeHours = async (day) => {
-
     for (let i = 0; i < 24; i++) {
       let date = allWeatherData.days[day].hours[i].datetime;
 
@@ -39,7 +39,7 @@ function DataGrabber() {
       parent[i].children[0].textContent = date;
     }
   };
-  
+
   const asyncIconHours = async (day) => {
     for (let i = 0; i < 24; i++) {
       let icon = allWeatherData.days[day].hours[i].icon;
@@ -58,7 +58,7 @@ function DataGrabber() {
       let temp = allWeatherData.days[day].hours[i].temp;
 
       // console.log(temp)
-      parent[i].children[2].textContent = supportFunctions.tempChecker(temp)
+      parent[i].children[2].textContent = supportFunctions.tempChecker(temp);
     }
   };
 
@@ -87,14 +87,13 @@ function DataGrabber() {
     }
   };
 
-
-
   const asyncTempFeelHours = async (day) => {
     for (let i = 0; i < 24; i++) {
       let tempFeel = allWeatherData.days[day].hours[i].feelslike;
 
       // console.log(temp)
-      parent[i].children[5].textContent = supportFunctions.tempChecker(tempFeel);
+      parent[i].children[5].textContent =
+        supportFunctions.tempChecker(tempFeel);
     }
   };
 
@@ -120,52 +119,60 @@ function DataGrabber() {
     buttonParent.replaceChildren(); //can this be done differently?
     for (let i = 0; i < 7; i++) {
       let input = document.querySelector("#search").value;
-      let p = DOMgen.makePara()
+      let p = DOMgen.makePara();
       let date = allWeatherData.days[i].datetime;
       let button = DOMgen.makeButton("", "day-button");
       let image = DOMgen.makeImage();
-      image.src = supportFunctions.iconInterpreter(allWeatherData.days[i].icon)
-     
-      
+      image.src = supportFunctions.iconInterpreter(allWeatherData.days[i].icon);
+
       p.textContent = date;
-      button.appendChild(image)
-      button.appendChild(p)
+      button.appendChild(image);
+      button.appendChild(p);
       buttonParent.appendChild(button);
 
-      button.addEventListener("click", () => {
+      if (i === 0 && !document.querySelector('.button__focus') ) {button.classList.toggle('button__focus')}
+     
+
+      button.addEventListener("click", (e) => {
         returnData(i);
+        supportFunctions.buttonSwapper(e)
       });
+      
       // buttonParent.children[i].textContent = date
     }
   };
 
-  const asyncAddress = async() =>{
-    let address = allWeatherData.resolvedAddress
-    let p = DOMgen.makePara()
-    p.textContent = 'Previsione per : ' + address
-    parentLeft.appendChild(p)
-  }
+  const asyncAddress = async () => {
+    let address = allWeatherData.resolvedAddress;
+    let p = DOMgen.makePara();
+    p.textContent = "Previsione per : " + address;
+    parentLeft.appendChild(p);
+  };
 
-  const asyncDayDescription = async(day) =>{
-    let description = allWeatherData.days[day].description
-    let p = DOMgen.makePara()
-    p.textContent = description
-    parentLeft.appendChild(p)
-  }
+  const asyncDayDescription = async (day) => {
+    let description = allWeatherData.days[day].description;
+    let p = DOMgen.makePara();
+    p.textContent = description;
+    parentLeft.appendChild(p);
+  };
 
-  const asyncDayTemp = async(day) =>{
-    let container = DOMgen.makeDiv('daily__tempdata')
-    let tempMin = supportFunctions.tempChecker(allWeatherData.days[day].tempmin)
-    let tempMax = supportFunctions.tempChecker(allWeatherData.days[day].tempmax)
-    
-    let p1 = DOMgen.makePara()
-    let p2 = DOMgen.makePara()
-    p1.textContent = 'Minima: ' + tempMin 
-    p2.textContent = 'Massima: ' + tempMax
-    parentLeft.appendChild(container)
-    container.appendChild(p1)
-    container.appendChild(p2)
-  }
+  const asyncDayTemp = async (day) => {
+    let container = DOMgen.makeDiv("daily__tempdata");
+    let tempMin = supportFunctions.tempChecker(
+      allWeatherData.days[day].tempmin
+    );
+    let tempMax = supportFunctions.tempChecker(
+      allWeatherData.days[day].tempmax
+    );
+
+    let p1 = DOMgen.makePara();
+    let p2 = DOMgen.makePara();
+    p1.textContent = "Minima: " + tempMin;
+    p2.textContent = "Massima: " + tempMax;
+    parentLeft.appendChild(container);
+    container.appendChild(p1);
+    container.appendChild(p2);
+  };
 
   // const asyncDayTempFeel = async(day) =>{
   //   let tempMin = supportFunctions.tempChecker(allWeatherData.days[day].feelslikemin)
@@ -175,61 +182,63 @@ function DataGrabber() {
   //   parentLeft.appendChild(p)
   // }
 
-  const asyncDate = async(day) =>{
-    let date = allWeatherData.days[day].datetime
-    let p = DOMgen.makePara()
-    p.textContent = date
-    parentRight.appendChild(p)
-  }
+  const asyncDate = async (day) => {
+    let date = allWeatherData.days[day].datetime;
+    let p = DOMgen.makePara();
+    p.textContent = date;
+    parentRight.appendChild(p);
+  };
 
-  const asyncDaySun = async(day) =>{ //Use SVG for the sunset sunrise
-    let container = DOMgen.makeDiv('daily__sundata')
-    let sunup = allWeatherData.days[day].sunrise
-    let sundown = allWeatherData.days[day].sunset
-    
-    let p1 = DOMgen.makePara()
-    let p2 = DOMgen.makePara()
-    p1.textContent = 'Alba: ' + sunup
-    p2.textContent = 'Tramonto: ' + sundown
-    parentRight.appendChild(container)
-    container.appendChild(p1)
-    container.appendChild(p2)
-  }
+  const asyncDaySun = async (day) => {
+    //Use SVG for the sunset sunrise
+    let container = DOMgen.makeDiv("daily__sundata");
+    let sunup = allWeatherData.days[day].sunrise;
+    let sundown = allWeatherData.days[day].sunset;
 
-  const asyncDayRain = async(day) =>{
-    let container = DOMgen.makeDiv('daily__raindata')
-    let rain = allWeatherData.days[day].precip
-    let rainChance = allWeatherData.days[day].precipprob
-    
-    let p1 = DOMgen.makePara()
-    let p2 = DOMgen.makePara()
-    p1.textContent = 'Quantita di pioggia: '  + rain +'mm'
-    p2.textContent = 'Probabilita: ' + rainChance
-    parentRight.appendChild(container)
-    container.appendChild(p1)
-    container.appendChild(p2)
-  }
+    let p1 = DOMgen.makePara();
+    let p2 = DOMgen.makePara();
+    p1.textContent = "Alba: " + sunup;
+    p2.textContent = "Tramonto: " + sundown;
+    parentRight.appendChild(container);
+    container.appendChild(p1);
+    container.appendChild(p2);
+  };
 
-  const asyncDayWind = async(day) =>{
-    let container = DOMgen.makeDiv('daily__winddata')
-    let winddir = supportFunctions.windDirChecker(allWeatherData.days[day].winddir)
-    let windspeed = allWeatherData.days[day].windspeed
-    let p1 = DOMgen.makePara()
-    let p2 = DOMgen.makePara()
-    p1.textContent = 'Vento: ' + winddir 
-    p2.textContent = 'Velocita: ' + windspeed + 'km/h'
-    parentRight.appendChild(container)
-    container.appendChild(p1)
-    container.appendChild(p2)
-  }
+  const asyncDayRain = async (day) => {
+    let container = DOMgen.makeDiv("daily__raindata");
+    let rain = allWeatherData.days[day].precip;
+    let rainChance = allWeatherData.days[day].precipprob;
 
-  const asyncDayConditions = async(day) =>{
-    let conditions = allWeatherData.days[day].conditions
-    let p = DOMgen.makePara()
-    p.textContent = conditions
-    parentLeft.appendChild(p)
-  }
+    let p1 = DOMgen.makePara();
+    let p2 = DOMgen.makePara();
+    p1.textContent = "Quantita di pioggia: " + rain + "mm";
+    p2.textContent = "Probabilita: " + rainChance;
+    parentRight.appendChild(container);
+    container.appendChild(p1);
+    container.appendChild(p2);
+  };
 
+  const asyncDayWind = async (day) => {
+    let container = DOMgen.makeDiv("daily__winddata");
+    let winddir = supportFunctions.windDirChecker(
+      allWeatherData.days[day].winddir
+    );
+    let windspeed = allWeatherData.days[day].windspeed;
+    let p1 = DOMgen.makePara();
+    let p2 = DOMgen.makePara();
+    p1.textContent = "Vento: " + winddir;
+    p2.textContent = "Velocita: " + windspeed + "km/h";
+    parentRight.appendChild(container);
+    container.appendChild(p1);
+    container.appendChild(p2);
+  };
+
+  const asyncDayConditions = async (day) => {
+    let conditions = allWeatherData.days[day].conditions;
+    let p = DOMgen.makePara();
+    p.textContent = conditions;
+    parentLeft.appendChild(p);
+  };
 
   const returnData = async (day) => {
     await asyncTimeHours(day);
@@ -240,19 +249,19 @@ function DataGrabber() {
     await asyncTempFeelHours(day);
     await asyncUVHours(day);
     await asyncPressureHours(day);
-    await asyncDatesDays();
+    
     await asyncDayForecast(day);
   };
 
   const returnEverything = async (day, input) => {
     await weatherData(input);
-
+    await asyncDatesDays();
     await returnData(day);
   };
 
-  const asyncDayForecast = async (day) =>{
-    parentLeft.replaceChildren()
-    parentRight.replaceChildren()
+  const asyncDayForecast = async (day) => {
+    parentLeft.replaceChildren();
+    parentRight.replaceChildren();
     await asyncAddress();
     await asyncDayConditions(day);
     await asyncDayDescription(day);
@@ -260,23 +269,20 @@ function DataGrabber() {
     // await asyncDayTempFeel(day);
     await asyncDate(day);
     await asyncDaySun(day);
-    await asyncDayRain(day)
+    await asyncDayRain(day);
     await asyncDayWind(day);
-
-  }
+  };
   return { returnData, returnEverything, getWeatherData, asyncDatesDays };
 }
 
-
-
 function ButtonPlacer() {
   const weatherData = DataGrabber();
-  
+
   const searchButton = async () => {
     let button = document.querySelector(".searchBtn");
     button.addEventListener("click", () => {
       weatherData.returnEverything(0, inputGrabber());
-      
+
       console.log(weatherData.getWeatherData());
     });
   };
@@ -287,14 +293,22 @@ function ButtonPlacer() {
     return input;
   };
 
-  const dayButtons = () => {
-    const parent = document.querySelector(".day-button__container");
-    for (let i = 0; i < 7; i++) {
-      let button = DOMgen.makeButton();
-      button.textContent = weatherData.asyncDatesDays(i);
-      parent.appendChild(button);
-    }
-  };
+//   const dayButtons = () => {
+//     const parent = document.querySelector(".day-button__container");
+//     let button = DOMgen.makeButton();
+//     for (let i = 0; i < 7; i++) {
+//       if (i === 0) {
+//         console.log("boops");
+//         button.classList.add("button__focus")
+//         button.textContent = weatherData.asyncDatesDays(i);
+//         parent.appendChild(button);;
+//       } else{
+// console.log('baps')
+//       button.textContent = weatherData.asyncDatesDays(i);
+//       parent.appendChild(button);
+//       }
+//     }
+//   };
 
   const cityButtons = () => {
     let cities = Array.from(document.querySelectorAll(".cities__list button"));
@@ -307,7 +321,7 @@ function ButtonPlacer() {
     });
   };
 
-  return { searchButton, dayButtons, cityButtons };
+  return { searchButton,  cityButtons };
 }
 let test2 = ButtonPlacer();
 test2.searchButton();

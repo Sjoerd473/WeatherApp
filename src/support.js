@@ -135,7 +135,18 @@ function supportFunction()  {
             break;
         }
       };
-  return { windDirChecker, tempChecker, iconInterpreter}
+
+      const buttonSwapper = (e) => {
+          let oldButton = document.querySelector('.button__focus')
+          oldButton.classList.toggle('button__focus')
+         
+          e.target.closest('button').classList.toggle('button__focus')
+      }
+
+      const dayButtonAssigner = () => {
+        document.querySelector('.day-button').classList.toggle('button__focus')
+      }
+  return { windDirChecker, tempChecker, iconInterpreter, buttonSwapper, dayButtonAssigner}
 }
 
 export const supportFunctions = supportFunction()

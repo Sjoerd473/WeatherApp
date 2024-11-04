@@ -128,8 +128,8 @@ ul > button:hover {
 .daily__container {
   width: 50vw;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5rem;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  column-gap: 5rem;
   box-shadow: 5px 5px 5px -5px black;
   margin-bottom: 5rem;
   background: var(--blue-gradient);

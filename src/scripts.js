@@ -272,15 +272,15 @@ function DataGrabber() {
     parentLeft.appendChild(p);
   };
 
-  const asyncDayBackground = async (day) =>{
-    let parent = document.querySelector('.weather-image')
-    parent.replaceChildren();
-    let image = DOMgen.makeImage();
-    let imageIcon = allWeatherData.days[day].icon
-    image.src = await supportFunctions.gifGenerator(imageIcon);
-    parent.appendChild(image)
+  // const asyncDayBackground = async (day) =>{
+  //   let parent = document.querySelector('.weather-image')
+  //   parent.replaceChildren();
+  //   let image = DOMgen.makeImage();
+  //   let imageIcon = allWeatherData.days[day].icon
+  //   image.src = await supportFunctions.gifGenerator(imageIcon);
+  //   parent.appendChild(image)
       
-  }
+  // }
 
   const returnData = async (day) => {
     await asyncTimeHours(day);
@@ -314,7 +314,7 @@ function DataGrabber() {
     await asyncDaySun(day);
     await asyncDayRain(day);
     await asyncDayWind(day);
-    await asyncDayBackground(day);
+    // await asyncDayBackground(day);
   };
   return { returnData, returnEverything, getWeatherData, asyncDatesDays };
 }

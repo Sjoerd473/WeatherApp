@@ -115,11 +115,14 @@ function DataGrabber() {
     }
   };
 
-  const asyncDatesDays = async (day) => {
+  const asyncDatesDays = async (start, finish) => {
     buttonParent.replaceChildren(); //can this be done differently?
-    for (let i = 0; i < 7; i++) {
+    for (let i = start; i < finish; i++) {
       let input = document.querySelector("#search").value;
       let p = DOMgen.makePara();
+      let temp = DOMgen.makePara();
+      temp.classList.add('button__temp')
+      temp.textContent = supportFunctions.tempChecker(allWeatherData.days[i].temp)
       let date = allWeatherData.days[i].datetime;
       let button = DOMgen.makeButton("", "day-button");
       let image = DOMgen.makeImage();
@@ -128,6 +131,7 @@ function DataGrabber() {
       p.textContent = date;
       button.appendChild(image);
       button.appendChild(p);
+      button.appendChild(temp);
       buttonParent.appendChild(button);
 
       if (i === 0 && !document.querySelector('.button__focus') ) {button.classList.toggle('button__focus')}
@@ -140,6 +144,15 @@ function DataGrabber() {
       
       // buttonParent.children[i].textContent = date
     }
+    let button2 = DOMgen.makeButton("test", "day-button");
+    buttonParent.appendChild(button2)
+    button2.addEventListener('click', () =>{
+       
+      asyncDatesDays(8, 15) 
+      supportFunctions.buttonSwapper()
+      
+    })
+
   };
 
   const asyncAddress = async () => {
@@ -255,8 +268,9 @@ function DataGrabber() {
 
   const returnEverything = async (day, input) => {
     await weatherData(input);
-    await asyncDatesDays();
+    await asyncDatesDays(0, 7);
     await returnData(day);
+    await supportFunctions.hiddenSwapper()
   };
 
   const asyncDayForecast = async (day) => {
@@ -286,6 +300,16 @@ function ButtonPlacer() {
       console.log(weatherData.getWeatherData());
     });
   };
+
+  const searchField = async () =>{
+    let field = document.querySelector('#search')
+    field.addEventListener('keyup', (e) =>{
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        document.querySelector(".searchBtn").click()
+      }
+    })
+  }
 
   const inputGrabber = () => {
     let input = document.querySelector("#search").value;
@@ -321,11 +345,12 @@ function ButtonPlacer() {
     });
   };
 
-  return { searchButton,  cityButtons };
+  return { searchButton,  cityButtons, searchField };
 }
 let test2 = ButtonPlacer();
 test2.searchButton();
 test2.cityButtons();
+test2.searchField();
 // let test = DataGrabber();
 // let button = document.querySelector(".searchBtn");
 // button.addEventListener("click", () => {

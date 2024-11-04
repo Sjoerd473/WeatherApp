@@ -11,8 +11,9 @@
       <!-- This will be the box that wraps around both the input and the button, making it look like one field-->
       <div class="search__container">
         <div class="search__bar">
-          <input type="search" name="search" id="search" />
-          <button class="searchBtn">Search</button>
+          <span class="triangle"><img src="images/triangle-right-svgrepo-com.svg" alt="The search button"></span>
+          <input type="search" name="search" id="search"  />
+          <button class="searchBtn"><img src="images/magnify.svg" alt="The search button"></button>
         </div>
         <!-- Maybe the radio elements need to go in their seperate divs-->
         <div class="radio__buttons">
@@ -44,13 +45,13 @@
         <button>Schio</button>
       </ul>
     </nav>
-    <section class="daily__container">
+    <section class="daily__container hidden" hidden>
       <div class="daily__container-left">
-        <!-- <p>Previsione per:</p>
+        <p>Previsione per:</p>
         <p>Condizioni:</p>
         <p>Desc.</p>
         <p>Temp</p>
-        <p>Temp perc</p> -->
+        <p>Temp perc</p>
       </div>
       <div class="daily__container-right">
         <p>Date</p>
@@ -63,17 +64,17 @@
       </div>
       <div class="weather-image"><img src="images/dog.jpg" alt=""></div>
     </section>
-    <!-- <button class="testbtn">test</button> -->
-    <div class="forecast__container">
+    
+    <div class="forecast__container hidden" hidden>
       <div class="day-button__container"></div>
-      <table class="weather__container hidden">
+      <table class="weather__container ">
         <thead>
           <tr class="weather__container-top">
             <th>Ora</th>
             <th>
-              Tempo<!--to replace with an empty img tag(?) that becomes an icon -->
+              Tempo
             </th>
-            <th>T <span class="text__accent">c</span></th>
+            <th>Temperatura</th>
             <th>Precipitazioni</th>
             <th>Vento</th>
             <th>T <span class="text__accent">perc</span></th>

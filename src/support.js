@@ -61,9 +61,9 @@ function supportFunction()  {
       const tempChecker = (number) => {
         let radio = document.querySelector('input[name="toggle"]:checked').value;
         if (radio === "celcius") {
-          return number + "c";
+          return number + "°C";
         } else if (radio === "fahrenheit") {
-          return Math.ceil((number * 9) / 5 + 32) + "f";
+          return Math.ceil((number * 9) / 5 + 32) + "°F";
         }
       };
 
@@ -137,16 +137,27 @@ function supportFunction()  {
       };
 
       const buttonSwapper = (e) => {
+        if (!document.querySelector('.button__focus')){
+          let parent = document.querySelector('.day-button__container')
+          parent.firstElementChild.classList.toggle('button__focus')
+        } else {
           let oldButton = document.querySelector('.button__focus')
           oldButton.classList.toggle('button__focus')
          
           e.target.closest('button').classList.toggle('button__focus')
+        }
       }
 
-      const dayButtonAssigner = () => {
-        document.querySelector('.day-button').classList.toggle('button__focus')
+      const hiddenSwapper = () =>{
+        document.querySelectorAll('.hidden').forEach(element => {
+          element.removeAttribute('hidden')
+        });
       }
-  return { windDirChecker, tempChecker, iconInterpreter, buttonSwapper, dayButtonAssigner}
+
+      // const dayButtonAssigner = () => {
+      //   document.querySelector('.day-button').classList.toggle('button__focus')
+      // }
+  return { windDirChecker, tempChecker, iconInterpreter, buttonSwapper, hiddenSwapper}
 }
 
 export const supportFunctions = supportFunction()

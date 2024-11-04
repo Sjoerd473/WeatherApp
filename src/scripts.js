@@ -1,6 +1,8 @@
 import "./styles.css";
 import { DOMgen } from "./DOMgenerator.js";
 import { supportFunctions } from "./support.js";
+import triangleRight from "./images/triangle-right-svgrepo-com.svg"
+import triangleLeft from "./images/triangle-left-svgrepo-com.svg"
 
 // link using latitude and longitude
 // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/38.9697,-77.385?key=YOUR_API_KEY
@@ -144,13 +146,29 @@ function DataGrabber() {
       
       // buttonParent.children[i].textContent = date
     }
-    let button2 = DOMgen.makeButton("test", "day-button");
-    buttonParent.appendChild(button2)
-    button2.addEventListener('click', () =>{
+    let buttonParent2 = document.querySelector('.forecast__container')
+    let buttonLeft = DOMgen.makeButton("", "day-button-left");
+    let buttonRight = DOMgen.makeButton("", "day-button-right");
+    let buttonImageRight = DOMgen.makeImage();
+    let buttonImageLeft = DOMgen.makeImage();
+    buttonImageRight.src = triangleRight
+    buttonImageLeft.src = triangleLeft
+    buttonParent2.appendChild(buttonRight)
+    buttonParent2.appendChild(buttonLeft)
+    buttonLeft.appendChild(buttonImageLeft)
+    buttonRight.appendChild(buttonImageRight)
+    buttonRight.addEventListener('click', () =>{
        
       asyncDatesDays(8, 15) 
+      asyncDayForecast(8);
       supportFunctions.buttonSwapper()
       
+    })
+
+    buttonLeft.addEventListener('click', (e) =>{
+      asyncDatesDays(0, 7);
+      asyncDayForecast(0);
+      // supportFunctions.buttonSwapper(e);
     })
 
   };

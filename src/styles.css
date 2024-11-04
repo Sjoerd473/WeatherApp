@@ -149,9 +149,14 @@ ul > button:hover{
   width: 100%;
   object-fit: cover;
 }
+
+.forecast__container{
+  position:relative;
+}
 .day-button__container {
   display: flex;
   width: 100%;
+  
 }
 
 .day-button__container > button {
@@ -161,6 +166,29 @@ ul > button:hover{
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  
+}
+
+.day-button-right{
+position:absolute;
+top:15px;
+right: -100px;
+
+}
+
+.day-button-left{
+position:absolute;
+top: 15px;
+left: -100px;
+}
+
+.day-button-left:hover, .day-button-right:hover{
+  background: var(--blue-gradient);
+  border-radius: 50%;
+}
+
+.day-button-left > img, .day-button-right > img{
+  opacity: 1;
   
 }
 

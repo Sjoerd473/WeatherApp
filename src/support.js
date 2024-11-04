@@ -20,6 +20,7 @@ import thunderRain from "./images/thunder-rain.svg";
 import thunderShowersDay from "./images/thunder-showers-day.svg";
 import thunderShowersNight from "./images/thunder-showers-night.svg";
 import wind from "./images/wind.svg";
+import { giphyGrabber } from "./gif";
 
 function supportFunction() {
   const windDirChecker = (input) => {
@@ -140,7 +141,7 @@ function supportFunction() {
     let parent = document.querySelector(".day-button__container");
     if (!document.querySelector(".button__focus")) {
       parent.firstElementChild.classList.toggle("button__focus");
-    }  else {
+    } else {
       let oldButton = document.querySelector(".button__focus");
       oldButton.classList.toggle("button__focus");
 
@@ -154,15 +155,48 @@ function supportFunction() {
     });
   };
 
-  // const dayButtonAssigner = () => {
-  //   document.querySelector('.day-button').classList.toggle('button__focus')
-  // }
+  const gifGenerator =  async (icon) => {
+    switch (icon) {
+      case "snow":
+      case "snow-showers-day":
+      case "snow-showers-night":
+        return await giphyGrabber.grabImage('snow');
+
+      case "thunder-rain":
+      case "thunder-showers-day":
+      case "thunder-showers-night":
+        return giphyGrabber.grabImage("thunder");
+
+      case "rain":
+      case "showers-day":
+      case "showers-night":
+        return giphyGrabber.grabImage("rain");
+
+      case "fog":
+        return giphyGrabber.grabImage("fog");
+
+      case "wind":
+        return giphyGrabber.grabImage("wind");
+
+      case "cloudy":
+      case "partly-cloudy-day":
+      case "partly-cloudy-night":
+        console.log(giphyGrabber.grabImage("clouds"))
+        return await giphyGrabber.grabImage("clouds");
+
+      case "clear-day":
+      case "clear-night":
+        return giphyGrabber.grabImage("sun");
+    }
+  };
+
   return {
     windDirChecker,
     tempChecker,
     iconInterpreter,
     buttonSwapper,
     hiddenSwapper,
+    gifGenerator,
   };
 }
 

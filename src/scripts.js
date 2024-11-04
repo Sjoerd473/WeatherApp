@@ -1,6 +1,7 @@
 import "./styles.css";
 import { DOMgen } from "./DOMgenerator.js";
 import { supportFunctions } from "./support.js";
+import { giphyGrabber } from "./gif.js";
 import triangleRight from "./images/triangle-right-svgrepo-com.svg"
 import triangleLeft from "./images/triangle-left-svgrepo-com.svg"
 
@@ -165,10 +166,10 @@ function DataGrabber() {
       
     })
 
-    buttonLeft.addEventListener('click', (e) =>{
+    buttonLeft.addEventListener('click', () =>{
       asyncDatesDays(0, 7);
       asyncDayForecast(0);
-      // supportFunctions.buttonSwapper(e);
+     
     })
 
   };
@@ -271,6 +272,16 @@ function DataGrabber() {
     parentLeft.appendChild(p);
   };
 
+  const asyncDayBackground = async (day) =>{
+    let parent = document.querySelector('.weather-image')
+    parent.replaceChildren();
+    let image = DOMgen.makeImage();
+    let imageIcon = allWeatherData.days[day].icon
+    image.src = await supportFunctions.gifGenerator(imageIcon);
+    parent.appendChild(image)
+      
+  }
+
   const returnData = async (day) => {
     await asyncTimeHours(day);
     await asyncTempHours(day);
@@ -303,6 +314,7 @@ function DataGrabber() {
     await asyncDaySun(day);
     await asyncDayRain(day);
     await asyncDayWind(day);
+    await asyncDayBackground(day);
   };
   return { returnData, returnEverything, getWeatherData, asyncDatesDays };
 }
@@ -369,6 +381,9 @@ let test2 = ButtonPlacer();
 test2.searchButton();
 test2.cityButtons();
 test2.searchField();
+
+let test3 = giphyGrabber();
+test3.grabImage()
 // let test = DataGrabber();
 // let button = document.querySelector(".searchBtn");
 // button.addEventListener("click", () => {

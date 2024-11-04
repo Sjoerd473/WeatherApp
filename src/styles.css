@@ -10,7 +10,7 @@
 }
 
 body {
---blue-gradient: linear-gradient(#6492e6, #ffffff);
+  --blue-gradient: linear-gradient(#6492e6, #ffffff);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 
@@ -110,20 +110,19 @@ ul {
   gap: 1rem;
 }
 
-ul > button{
-  font-size:1rem;
-  font-weight:bold;
-  border:2px solid #6492e6;
-  padding:3px;
+ul > button {
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #6492e6;
+  padding: 3px;
   border-radius: 5px;
 }
 
-ul > button:hover{
+ul > button:hover {
   background: var(--blue-gradient);
-  border:none;
- 
-  margin:2px;
-  
+  border: none;
+
+  margin: 2px;
 }
 
 .daily__container {
@@ -135,68 +134,66 @@ ul > button:hover{
   margin-bottom: 5rem;
   background: var(--blue-gradient);
   border: 2px solid black;
-  padding:0.5rem;
-
+  padding: 0.5rem;
 }
 
 .daily__container-left,
 .daily__container-right {
   display: grid;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
 }
 
-.weather-image {
+.weather-image > img {
   width: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
-.forecast__container{
-  position:relative;
+
+.forecast__container {
+  position: relative;
 }
 .day-button__container {
   display: flex;
   width: 100%;
-  
 }
 
 .day-button__container > button {
   flex-grow: 1;
-  position:relative;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  
 }
 
-.day-button-right{
-position:absolute;
-top:15px;
-right: -100px;
-
+.day-button-right {
+  position: absolute;
+  top: 15px;
+  right: -100px;
 }
 
-.day-button-left{
-position:absolute;
-top: 15px;
-left: -100px;
+.day-button-left {
+  position: absolute;
+  top: 15px;
+  left: -100px;
 }
 
-.day-button-left:hover, .day-button-right:hover{
+.day-button-left:hover,
+.day-button-right:hover {
   background: var(--blue-gradient);
   border-radius: 50%;
 }
 
-.day-button-left > img, .day-button-right > img{
+.day-button-left > img,
+.day-button-right > img {
   opacity: 1;
-  
 }
-
 
 button {
   background-color: white;
   border-style: none;
-  padding:1px;
+  padding: 1px;
 }
 button p {
   font-size: 1rem;
@@ -208,20 +205,19 @@ button img {
   opacity: 0.5;
 }
 
-.button__temp{
+.button__temp {
   position: absolute;
-top:10px;
-left:10px;
-font-weight: bold;
-font-size: larger;
-
-
+  top: 10px;
+  left: 10px;
+  font-weight: bold;
+  font-size: larger;
 }
 
-.button__focus, .day-button__container > button:hover {
+.button__focus,
+.day-button__container > button:hover {
   background: var(--blue-gradient);
-  border:1px solid black;
-  padding:0px;
+  border: 1px solid black;
+  padding: 0px;
 }
 
 body {
@@ -240,7 +236,6 @@ body {
 .text__accent {
   font-size: 0.75em;
   margin-left: -5px;
-  
 }
 thead tr th {
   border: 1px solid black;
